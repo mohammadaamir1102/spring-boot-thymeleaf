@@ -13,9 +13,11 @@
 <body>
 <div class="container-fluid ">
     <div class="row">
-        <div class="col-md-6 offset-md-3 mt-3 border">
+        <div class="col-md-6 offset-md-3 mt-5 border">
             <form th:action="@{/saveStudent}" method="post", th:object="${student}">
-                <h1 class="text-center">Student Registration</h1>
+
+                <h1 class="text-center mt-2">Student Registration</h1>
+
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Name</label>
                     <input type="studentName"
@@ -23,30 +25,65 @@
                            class="form-control"
                            id="exampleInputEmail1"
                            th:value="${student.studentName}"
+                           th:classappend="${#fields.hasErrors('studentName')? 'is-invalid' : ''}"
                            aria-describedby="emailHelp">
-                    <p th:each ="err : ${#fields.errors('studentName')}" th:text="${err}">
-                    </p>
+
+                    <div th:each="err : ${#fields.errors('studentName')}" th:text="${err}"
+                         class="invalid-feedback">
+                    </div>
+
                 </div>
+
                 <div class="mb-3">
                     <label for="address" class="form-label">Address</label>
                     <input type="studentAddress"
                            name="studentAddress"
                            th:value="${student.studentAddress}"
+                           th:classappend="${#fields.hasErrors('studentAddress')? 'is-invalid' : ''}"
                            class="form-control"
                            id="address">
+
+                    <div th:each="err : ${#fields.errors('studentAddress')}" th:text="${err}"
+                         class="invalid-feedback">
+                    </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="gender" class="form-label">Gender</label>
-                    <input type="studentGender"
-                           name="studentGender"
-                           class="form-control"
-                           id="gender">
+                    <label for="gender" class="form-label">Gender:</label>
+                    <select class="form-select" id="gender" th:field="*{studentGender}" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    <!-- Display validation error -->
+                    <small class="text-danger" th:if="${#fields.hasErrors('studentGender')}" th:errors="*{studentGender}"></small>
+
                 </div>
 
+<!--                <div class="mb-3 form-check">-->
+<!--                    <input type="checkbox"-->
+<!--                           class="form-check-input"-->
+<!--                           th:value="${student.agreement}"-->
+<!--                           th:classappend="${#fields.hasErrors('agreement')? 'is-invalid' : ''}"-->
+<!--                           name="agreement"-->
+<!--                           id="exampleCheck1">-->
+<!--                    <label class="form-check-label" for="exampleCheck1">-->
+<!--                        Agree terms and conditions-->
+<!--                    </label>-->
+
+<!--                    <div th:each="err : ${#fields.errors('agreement')}" th:text="${err}"-->
+<!--                         class="invalid-feedback">-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <input type="checkbox" class="form-check-input"
+                           id="subscribeNewsletter"
+                           th:field="*{agreement}"/>
+                    <label class="form-check-label" for="subscribeNewsletter">Terms and conditions is mandatory</label>
+                    <!-- Display validation error -->
+                    <small class="text-danger" th:if="${#fields.hasErrors('agreement')}" th:errors="*{agreement}"></small>
                 </div>
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>

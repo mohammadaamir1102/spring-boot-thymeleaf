@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -26,6 +27,6 @@ public class Student {
     private String studentAddress;
     @NotBlank(message = "Gender is mandatory")
     private String studentGender;
-//    @NotBlank(message = "Agreement is mandatory")
+    @AssertTrue(message = "Agreement is mandatory")
     private boolean agreement;
 }

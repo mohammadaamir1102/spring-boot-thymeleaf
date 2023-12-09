@@ -27,9 +27,9 @@ public class StudentController {
     public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "form";
-
         }
-        System.out.println(student);
+        Student savedStudent = studentService.saveStudent(student);
+        System.out.println(savedStudent);
         return "form";
     }
 }
