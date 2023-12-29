@@ -24,7 +24,7 @@
                            name="studentName"
                            class="form-control"
                            id="exampleInputEmail1"
-                           th:value="${student.studentName}"
+                           th:value="*{studentName}"
                            th:classappend="${#fields.hasErrors('studentName')? 'is-invalid' : ''}"
                            aria-describedby="emailHelp">
 
@@ -38,7 +38,7 @@
                     <label for="address" class="form-label">Address</label>
                     <input type="studentAddress"
                            name="studentAddress"
-                           th:value="${student.studentAddress}"
+                           th:value="*{studentAddress}"
                            th:classappend="${#fields.hasErrors('studentAddress')? 'is-invalid' : ''}"
                            class="form-control"
                            id="address">
@@ -90,6 +90,7 @@
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+                <a th:href = "@{'/getStudent/' + ${'1'} + '/' + ${'hello'}" target="_blank"> click</a>
             </form>
         </div>
     </div>

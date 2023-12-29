@@ -1,5 +1,6 @@
 package com.aamir.entity;
 
+import com.aamir.validator.ValidEmailOrPhone;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,4 +30,6 @@ public class Student {
     private String studentGender;
     @AssertTrue(message = "Agreement is mandatory")
     private boolean agreement;
+    @ValidEmailOrPhone
+    private String emailOrPhoneNo;
 }
