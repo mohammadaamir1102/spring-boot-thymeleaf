@@ -61,6 +61,21 @@
                            th:errors="*{studentGender}"></small>
 
                 </div>
+
+                <div class="mb-3">
+                    <label for="emailOrPhoneNo" class="form-label">Email or Phone</label>
+                    <input type="text"
+                           name="emailOrPhoneNo"
+                           th:value="*{emailOrPhoneNo}"
+                           th:classappend="${#fields.hasErrors('emailOrPhoneNo')? 'is-invalid' : ''}"
+                           class="form-control"
+                           id="emailOrPhoneNo">
+
+                    <div th:each="err : ${#fields.errors('emailOrPhoneNo')}" th:text="${err}"
+                         class="invalid-feedback">
+                    </div>
+                </div>
+
                 <div th:if="${@environment.getProperty('form.showPinCode') == 'true'}">
                     <div class="mb-3">
                         <label for="address" class="form-label">Pincode</label>
