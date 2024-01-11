@@ -60,6 +60,21 @@
                            th:errors="*{studentGender}"></small>
 
                 </div>
+                <div th:if="${@environment.getProperty('form.showPinCode') == 'true'}">
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Pincode</label>
+                        <input type="text"
+                               name="pinCode"
+                               th:value="*{pinCode}"
+                               th:classappend="${#fields.hasErrors('pinCode')? 'is-invalid' : ''}"
+                               class="form-control"
+                               id="pinCode">
+
+                        <div th:each="err : ${#fields.errors('pinCode')}" th:text="${err}"
+                             class="invalid-feedback">
+                        </div>
+                    </div>
+                </div>
 
                 <!--                <div class="mb-3 form-check">-->
                 <!--                    <input type="checkbox"-->
@@ -87,10 +102,11 @@
                     <small class="text-danger" th:if="${#fields.hasErrors('agreement')}"
                            th:errors="*{agreement}"></small>
                 </div>
+
+
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                <a th:href = "@{'/getStudent/' + ${'1'} + '/' + ${'hello'}" target="_blank"> click</a>
             </form>
         </div>
     </div>

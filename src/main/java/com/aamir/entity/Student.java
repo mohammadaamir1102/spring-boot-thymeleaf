@@ -32,4 +32,5 @@ public class Student {
     private boolean agreement;
     @ValidEmailOrPhone
     private String emailOrPhoneNo;
+    private String pinCode;
 }
