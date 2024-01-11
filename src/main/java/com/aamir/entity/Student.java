@@ -33,4 +33,5 @@ public class Student {
     @ValidEmailOrPhone
     private String emailOrPhoneNo;
     private String pinCode;
+    private String country;
 }
