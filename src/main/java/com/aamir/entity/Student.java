@@ -31,6 +31,7 @@ public class Student {
     @AssertTrue(message = "Agreement is mandatory")
     private boolean agreement;
     @ValidEmailOrPhone
+    @NotBlank(message = "Email or Phone no is mandatory")
     private String emailOrPhoneNo;
     private String pinCode;
     private String country;
