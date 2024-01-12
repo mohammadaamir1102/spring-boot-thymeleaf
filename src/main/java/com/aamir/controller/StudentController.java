@@ -3,8 +3,10 @@ package com.aamir.controller;
 import com.aamir.entity.Student;
 import com.aamir.repo.StudentRepository;
 import com.aamir.service.StudentService;
+import com.aamir.util.StudentUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,9 +26,16 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+
+    @Value("${form.showPinCode}")
+    private String pinCodeTag;
+
     @GetMapping("/form")
     public String openForm(Model model) {
         model.addAttribute("student", new Student());
+        System.out.println(pinCodeTag);
+        Boolean booleanValue = StudentUtil.convertToBoolean(pinCodeTag);
+        System.out.println(booleanValue);
         return "form";
     }
 

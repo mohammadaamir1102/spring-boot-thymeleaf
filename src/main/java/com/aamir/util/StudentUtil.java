@@ -15,4 +15,11 @@ public class StudentUtil {
         calender.add(Calendar.MINUTE, 10);
         return calender.getTime();
     }
+
+    public static Boolean convertToBoolean(String input){
+        String updateInput = input.toLowerCase().trim();
+        return "true".equalsIgnoreCase(updateInput);
+
+    }
+
 }
