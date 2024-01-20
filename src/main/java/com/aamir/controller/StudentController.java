@@ -64,4 +64,10 @@ public class StudentController {
         students.addAll(allStudents);
         return students;
     }
+
+    @GetMapping("/getAllData")
+    @ResponseBody
+    public List<Student> getAllStudent(){
+       return studentRepository.findAll();
+    }
 }
