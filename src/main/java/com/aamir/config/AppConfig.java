@@ -29,32 +29,32 @@ public class AppConfig {
         dmds.setUrl(Objects.requireNonNull(environment.getProperty("spring.datasource.url")));
         dmds.setUsername(Objects.requireNonNull(environment.getProperty("spring.datasource.username")));
         dmds.setPassword(Objects.requireNonNull(environment.getProperty("spring.datasource.password")));
-        dmds.setConnectionProperties(hibernateProperties());
+//        dmds.setConnectionProperties(hibernateProperties());
         return dmds;
     }
 
-    private final Properties hibernateProperties(){
-        Properties hiberProperties = new Properties();
-        hiberProperties.setProperty("hibernate.hbm2ddl.auto","update");
-        hiberProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
-        hiberProperties.setProperty("hibernate.show_sql","false");
-        hiberProperties.setProperty("hibernate.format_sql","false");
-        return hiberProperties;
-
-    }
-
-//    @Bean
-//    public JpaProperties jpaProperties() {
-//        Map<String, String> hibernateProperties = new HashMap<>();
-//        hibernateProperties.put("hibernate.show_sql", "true");
-//        hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
-//        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-//        hibernateProperties.put("hibernate.format_sql)", "true");
+//    private final Properties hibernateProperties(){
+//        Properties hiberProperties = new Properties();
+//        hiberProperties.setProperty("hibernate.hbm2ddl.auto","update");
+//        hiberProperties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQLDialect");
+//        hiberProperties.setProperty("hibernate.show_sql","true");
+//        hiberProperties.setProperty("hibernate.format_sql","true");
+//        return hiberProperties;
 //
-//        JpaProperties jpaProperties = new JpaProperties();
-//        jpaProperties.setProperties(hibernateProperties);
-//        return jpaProperties;
 //    }
+
+    @Bean
+    public JpaProperties jpaProperties() {
+        Map<String, String> hibernateProperties = new HashMap<>();
+        hibernateProperties.put("hibernate.show_sql", "true");
+        hibernateProperties.put("hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        hibernateProperties.put("hibernate.format_sql", "true");
+
+        JpaProperties jpaProperties = new JpaProperties();
+        jpaProperties.setProperties(hibernateProperties);
+        return jpaProperties;
+    }
 
 
 
