@@ -15,9 +15,20 @@
 <div class="container-fluid ">
     <div class="row">
         <div class="col-md-6 offset-md-3 mt-5 border">
+
+<!--            <div th:if="${captchaError!=null}" class="card-footer bg-info text-white">-->
+<!--                <span class="alert alert-danger" th:text="${captchaError}"></span>-->
+<!--            </div>-->
+
+
+
             <form th:action="@{/saveStudent}" method="post" , th:object="${student}">
 
                 <h1 class="text-center mt-2">Student Registration</h1>
+
+                <div th:if="${captchaError!=null}" >
+                    <span class="alert alert-danger" th:text="${captchaError}"></span>
+                </div>
 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Name</label>
@@ -75,6 +86,27 @@
                          class="invalid-feedback">
                     </div>
                 </div>
+
+                <div class="mb-3">
+
+                        <label class="form-label">Captcha</label>
+                        <img th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}"/>
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="enterCaptcha" class="form-label">Enter Captcha</label>
+                    <input type="hidden" th:field="*{hiddenCaptcha}"/>
+                    <!--<h1 th:text="*{hiddenCaptcha}"></h1>-->
+                    <input type="text"
+                           name="captcha"
+                           th:field="*{captcha}"
+                           th:classappend="${#fields.hasErrors('emailOrPhoneNo')? 'is-invalid' : ''}"
+                           class="form-control"
+                           id="enterCaptcha">
+                </div>
+
+
 
                 <div th:if="${@environment.getProperty('form.showPinCode') == 'true'}">
                     <div class="mb-3">
