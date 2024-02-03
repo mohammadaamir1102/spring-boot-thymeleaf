@@ -6,6 +6,7 @@ import com.aamir.repo.StudentRepository;
 import com.aamir.service.StudentService;
 import com.aamir.util.CaptchaUtil;
 import com.aamir.util.StudentUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +38,10 @@ public class StudentController {
     private String pinCodeTag;
 
     @GetMapping("/form")
-    public String openForm(Model model) {
+    public String openForm(Model model, HttpServletRequest httpServletRequest) {
+        long creationTime = httpServletRequest.getSession().getCreationTime();
+        convertDateto24hoursebefore(creationTime);
+        System.out.println(creationTime);
         Student student = new Student();
         getCaptcha(student);
         model.addAttribute("student", student);
@@ -41,6 +49,15 @@ public class StudentController {
         Boolean booleanValue = StudentUtil.convertToBoolean(pinCodeTag);
         System.out.println(booleanValue);
         return "form";
+    }
+
+    private String convertDateto24hoursebefore(long creationTime) {
+
+        LocalDateTime localDateTime = Instant.ofEpochMilli(creationTime).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        System.out.println(localDateTime);
+        LocalDateTime localDateTime1 = localDateTime.minusHours(24);
+        System.out.println(localDateTime1);
+        return "null";
     }
 
     @PostMapping("/saveStudent")
@@ -91,4 +108,7 @@ public class StudentController {
         user.setRealCaptcha(CaptchaUtil.encodeCaptcha(captcha));
 
     }
+
+
+
 }
