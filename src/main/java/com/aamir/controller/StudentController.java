@@ -2,6 +2,7 @@ package com.aamir.controller;
 
 import cn.apiclub.captcha.Captcha;
 import com.aamir.entity.Student;
+import com.aamir.exception.CustomeThymeleafException;
 import com.aamir.repo.StudentRepository;
 import com.aamir.service.StudentService;
 import com.aamir.util.CaptchaUtil;
@@ -38,7 +39,10 @@ public class StudentController {
     private String pinCodeTag;
 
     @GetMapping("/form")
-    public String openForm(Model model, HttpServletRequest httpServletRequest) {
+    public String openForm(Model model, HttpServletRequest httpServletRequest) throws CustomeThymeleafException {
+//        if(true){
+//            throw new CustomeThymeleafException();
+//        }
         long creationTime = httpServletRequest.getSession().getCreationTime();
         convertDateto24hoursebefore(creationTime);
         System.out.println(creationTime);
